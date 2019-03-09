@@ -8,9 +8,13 @@
     "babel-loader": "^7.1.5",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "chai": "^4.2.0",
     "express": "^4.16.4",
+    "mocha": "^6.0.2",
+    "pg": "^7.8.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
+    "sequelize": "^4.43.0",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3"
   },
@@ -26,7 +30,8 @@
     "postinstall": "npm run webpack",
     "webpack": "webpack",
     "webpack:dev": "npm run webpack -- --mode=development --watch",
-    "start:dev": "npm run webpack:dev & nodemon server.js --ignore src/ --ignore dist/"
+    "start:dev": "DATABASE_URL=postgres://localhost/acme_favorites_spa_db npm run webpack:dev & nodemon server.js --ignore src/ --ignore dist/",
+    "test": "DATABASE_URL=postgres://localhost/acme_favorites_spa_test_db ./node_modules/mocha/bin/mocha tests/models.spec.js tests/conn.spec.js --watch"
   },
   "keywords": [],
   "author": "",
