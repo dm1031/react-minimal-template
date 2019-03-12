@@ -17,6 +17,8 @@ const Favorite = conn.define('favorites', {
 
 Favorite.belongsTo(User);
 Favorite.belongsTo(Thing);
+User.hasMany(Favorite);
+Thing.hasMany(Favorite);
 
 
 module.exports = {
