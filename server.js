@@ -4,7 +4,7 @@ const path = require('path');
 
 const { User, Thing, Favorite } = require('./db/models');
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.get('/app.js', (req, res, next) => res.sendFile(path.join(__dirname, 'dist', 'main.js')));
 app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, 'index.html')));
