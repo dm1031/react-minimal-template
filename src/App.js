@@ -14,22 +14,21 @@ export default class App extends Component {
         }
     }
     componentDidMount() {
-        this.loadUsers();
-        this.loadThings();
-    }
-    loadUsers() {
-        axios.get('/api/users')
-            .then(({ data }) => this.setState({ users: data}))
-            .catch(error => console.log(error));
-    }
-    loadThings() {
-        axios.get('/api/things')
-            .then(({ data }) => this.setState({ things: data }))
-            .catch(error => console.log(error));
+        return Promise.all([
+            axios.get('/api/users'),
+            axios.get('/api/things')
+        ])
+        .then( ([ users, things ]) => [
+            users.data,
+            things.data
+        ])
+        .then(([ users, things ]) => {
+            this.setState({ users, things })
+        })
     }
     render() {
-        const users = this.state.users;
-        const things = this.state.things;
+        const { users, things } = this.state;
+        console.log(this.state)
         return (
             <HashRouter>
                 <div>
@@ -37,12 +36,10 @@ export default class App extends Component {
                         <div className="container">
                             <Route component={Nav} />
 
-                            <Users users={users} />
-                            <Things things={things} />
-                            
-                            <Route exact path="/users" component={Users} />
-                            <Route exact path="/things" component={Things} />
+                            <Route exact path="/users" render={() => <Users users={users} /> } />
+                            <Route exact path="/things" render={() => <Things things={things} />} />
                             <Redirect to="/users" />
+                            
                         </div>
                 </div>
             </HashRouter>

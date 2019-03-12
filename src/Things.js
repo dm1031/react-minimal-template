@@ -3,17 +3,28 @@ import React from 'react';
 
 const Things = ({ things }) => {
     return (
-        <div>
+        <ul>
             {
-                things.map( ({ id, name, favorite }) => {
+                things.map( ({ id, name, favorites }) => {
                     return (
                         <li key={id}>
                             {name}
+                                <ul>
+                                    {
+                                        favorites.map( ({ id, user }) => {
+                                            return (
+                                                <li key={id}>
+                                                    favorited by: {user.name}
+                                                </li>
+                                            )
+                                        })
+                                    }
+                                </ul>
                         </li>
                     )
                 })
             }
-        </div>
+        </ul>
     )
 }
 

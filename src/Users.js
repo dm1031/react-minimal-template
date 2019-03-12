@@ -3,18 +3,30 @@ import React from 'react';
 
 const Users = ({ users }) => {
     return (
-        <div>
+        <ul>
             {
-                users.map( ({ id, name, favorite }) => {
+                users.map( ({ id, name, favorites }) => {
                     return (
                         <li key={id}>
                             {name}
+                                <ul>
+                                    {
+                                        favorites.map( ({ id, rank, thing }) => {
+                                            return (
+                                                <li key={id}>
+                                                    {thing.name} (ranked) {rank}
+                                                </li>
+                                            )
+                                        })
+                                    }
+                                </ul>
                         </li>
                     )
                 })
-            }
-        </div>
+             }
+        </ul>
     )
 }
 
 export default Users;
+
