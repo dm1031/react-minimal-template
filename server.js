@@ -3,9 +3,11 @@ const app = express();
 const path = require('path');
 
 const { User, Thing, Favorite } = require('./db/models');
+const { syncAndSeed } = require('./db/index');
 
 const port = process.env.PORT;
 
+syncAndSeed();
 app.get('/app.js', (req, res, next) => res.sendFile(path.join(__dirname, 'dist', 'main.js')));
 app.get('/', (req, res, next) => res.sendFile(path.join(__dirname, 'index.html')));
 
