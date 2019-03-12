@@ -4,7 +4,7 @@ const { syncAndSeed } = require('./index');
 const usernames = ['moe', 'larry', 'curly', 'shep'];
 const things = ['foo', 'bar', 'bazz', 'quq', 'quip'];
 
-const seed = syncAndSeed()
+syncAndSeed()
     .then(() => {
         return Promise.all([
           Promise.all(
@@ -33,5 +33,3 @@ const seed = syncAndSeed()
           Favorite.create({ userId: userMap.larry.id, thingId: thingMap.bar.id, rank: 1}))
     ]);
 });
-
-module.exports = seed;
